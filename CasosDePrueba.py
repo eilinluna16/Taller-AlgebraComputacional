@@ -1,5 +1,4 @@
 from FuncionesPrincipales import isZ, isQ, isF
-from Operaciones import Operando
 
 print isZ('-6') #True
 print isZ('5') #True
