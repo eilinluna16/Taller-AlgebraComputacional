@@ -109,6 +109,7 @@ class Expresion:
                     lista[i+2]=''.join(lista[i+2:i+4])
                     lista[i+3]=''    
                 lista[i] = str(Operando(lista[i-1])**lista[i+2])
+                print lista[i-1]
                 lista[i-1] = ''
                 lista[i+1] = ''
                 lista[i+2] = ''
@@ -205,10 +206,10 @@ class Expresion:
         lista = Expresion(self.Numero())
         if lista.HayDecimal() == True:
             lista = Expresion(lista.Decimal())
-        if lista.HayPotencia() == True:
-            lista = Expresion(lista.Potencia())
         if lista.HayFraccion() == True:
             lista = Expresion(lista.Fraccion())
+        if lista.HayPotencia() == True:
+            lista = Expresion(lista.Potencia())
         if lista.HayMultiplicacion() == True:
             lista = Expresion(lista.Mult())
         if lista.HaySuma() == True:
@@ -217,43 +218,34 @@ class Expresion:
             lista = Expresion(lista.Resta())  
         if lista.HayDivision() == True:
             lista = Expresion(lista.Division())  
-        
         return lista
-        
+            
 def simplify(Expr): 
-   """    
-    if '(' in A:
+   def ElimVac(Expr):
+       Expr=list(Expr)
+       lista = ['[', "'", ' ', ',', ']']
+       for i in range(5):
+           A = lista[i] in Expr
+           while A == True:
+               Expr.remove(lista[i])
+               A = lista[i] in Expr
+       return ''.join(Expr)
+   
+   A = list(Expr)
+   if '(' in A:
         if A.count('(')!=A.count(')'):
             raise TypeError("Falta Parentesis")
-            
-        Expr1 = A[A.index('(')+1:A.index(')')]
-        Res = str(Expresion(Expr1).simplify()) 
-        print Res
-        print Expr1
-        print A
-        for i in range(1, len(Expr1)-2):
-            print A[A.index('(')+i]
-            A.pop[A.index('(')+i]
-            
-   """         
-    
-   A = str(Expresion(Expr).simplify()) 
-   Expr = list(A)
-   lista = ['[', "'", ' ', ',', ']']
-   for i in range(5):
-       A = lista[i] in Expr
-       while A == True:
-           Expr.remove(lista[i])
-           A = lista[i] in Expr
-
-   lista = ['[', "'", ' ', ',', ']']
-   for i in range(5):
-       A = lista[i] in Expr
-       while A == True:
-            Expr.remove(lista[i])
-            A = lista[i] in Expr
-      
-   R = ''.join(Expr)
+        
+        A_P = A.index('(')
+        A[A_P]=str(Expresion(A[A_P+1:A.index(')')]).simplify())
+        B = A[A_P+1:A.index(')')]
+        for i in range(len(B)+1):
+            A.pop(A_P+1)
+        A[A_P]=ElimVac(A[A_P])
+        Expr = ''.join(A)
+   A = str(Expresion(Expr).simplify())
+   R = ElimVac(A)
+   
    if isF(R)==True:
        R = Fraccionario(Fraccionario(R).simp())
        if R.den==1:

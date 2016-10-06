@@ -1,4 +1,5 @@
 from FuncionesPrincipales import isZ, isQ, isF
+from Expresion import simplify
 
 print isZ('-6') #True
 print isZ('5') #True

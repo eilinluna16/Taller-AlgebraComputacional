@@ -4,7 +4,6 @@ class Fraccionario:
         f = list(self.frac)
         self.num = int(''.join(f[0:f.index('/')])) # Numerador (int)
         self.den = int(''.join(f[f.index('/')+1:len(f)])) # Denominador (int)
-
     	if self.den == 0:
             raise ZeroDivisionError("NO SOLUTION: DEN=0")
     
