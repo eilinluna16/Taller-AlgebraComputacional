@@ -109,7 +109,6 @@ class Expresion:
                     lista[i+2]=''.join(lista[i+2:i+4])
                     lista[i+3]=''    
                 lista[i] = str(Operando(lista[i-1])**lista[i+2])
-                print lista[i-1]
                 lista[i-1] = ''
                 lista[i+1] = ''
                 lista[i+2] = ''
