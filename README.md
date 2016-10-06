@@ -1,4 +1,4 @@
-# MiniCAS
+# TALLER ALGEBRA COMPUTACIONAL
 
 ### Taller #2 de Herramientas Computacionales
 
